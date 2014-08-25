@@ -1,0 +1,217 @@
+<!DOCTYPE HTML>
+
+<html>
+        <head>
+       		<link rel="stylesheet" type="text/css" href="/static/css/bootstrap3.css">
+                <link rel="stylesheet" type="text/css" href="/static/css/jquery.jqplot.min.css">
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  		<script language="javascript" type="text/javascript" src="/static/js/jquery.jqplot.min.js"></script>
+                <script type="text/javascript" type="text/javascript" src="/static/js/jqplot.canvasTextRenderer.min.js"></script>
+                <script type="text/javascript" type="text/javascript" src="/static/js/jqplot.canvasAxisLabelRenderer.min.js"></script>
+
+		<script class="code" type="text/javascript">
+			$(document).ready(function(){
+                                {% if input_nums_array %}
+					{% if error_msg %}
+        	                                $('#chart1').hide();
+	                                        $('#longest_section').hide();
+						$('#run_time').hide();
+					{% else %}
+		                                $('#chart1').show();
+        		                        $('#longest_section').show();
+						$('#run_time').show();
+						$('#id_number_list').attr('placeholder','');
+	
+		                                var data_pts = [];
+        		                        var found_pts = [];
+                               
+                		                {% for pt in input_nums_array %}
+                        		                data_pts.push([{{ forloop.counter0 }}, {{ pt }}]);
+                                		{% endfor %} 
+	                                	{% for pt in index_array %}
+        	                                	found_pts.push([{{ pt }}, data_pts[{{ pt }}][1]]);
+                	                	{% endfor %}
+	
+        	                	        var plot1 = $.jqplot ('chart1', [data_pts,found_pts],
+                	                	{
+							title: 'Input Numbers and the Longest Sequence',
+							axesDefaults: {
+								labelRenderer: $.jqplot.CanvasAxisLabelRenderer
+							},
+                        	                	series:[ 
+                                	        	{
+                                        	        	// data_pts (all input points)
+                                                		// Show markers 7 pixels in size, with an 'x' style
+                                                		showLine:false, 
+	                                                	markerOptions: { size: 7, style:"x" }
+        	                                	},
+                	                        	{
+                        	                        	// found_pts (all points in the longest sequence)
+                                	                	// Connected Line, with width 2 and a diamond shaped marker
+                                        	        	lineWidth:2, 
+                                               			markerOptions: { style:'dimaond' }
+                                        		}, 
+                                        		],
+							axes: {
+        							xaxis: {
+          								label: "Input Index",
+          								pad: 0
+        								},
+        							yaxis: {
+          								label: "Input Value"
+        							}
+      							}
+                                		});
+					{% endif %}
+				{% else %}
+					$('#chart1').hide();
+                                        $('#longest_section').hide();
+					$('#run_time').hide();
+				{% endif %}
+				$('#submit_instr').hide();
+			});
+		</script>
+  
+		<style type="text/css">
+			.clear { clear:both; }
+			.clear10{ clear:both; height:10px; }
+			input[type='text'] {
+				width:100px;
+			}
+			.blue {
+				color:#3F97E0;
+			}
+			.attn,.errorlist {
+				color: #eb6864;
+			}
+			.errorlist {
+				list-style-type: none;
+			}
+		</style>
+		<script type="text/javascript">
+			function show_random()
+			{
+				$('#random_div').show();
+				$('#submit').hide();
+				$('#reset').hide();
+				$('#generate').hide();
+			}
+			function make_random()
+			{
+				var new_int_array = [];
+				var min = parseInt($('#min').val());
+                		var max = parseInt($('#max').val());
+                		var num = parseInt($('#num').val());
+				var warning = '';
+
+				if (min<-9007199254740992){
+					min = -9007199254740992;
+					warning += 'Minimum value adjusted to -9007199254740992.<br />';
+				}
+				if (max > 9007199254740992){
+					max = 9007199254740992;
+					warning += 'Maximum value adjusted to 9007199254740992.<br />';
+				}
+				if (num > 1000){	
+					num = 1000;
+					warning += 'Number of random points reduced to 1,000. ';
+				}
+
+				$('#warn_msg').html(warning);
+
+				var range = max - min + 1;
+
+				// generate "num" integers from "min" to "max"
+				for (i = 0; i < num; i++) { 
+					new_int_array[i] = Math.floor((Math.random() * range) + 1) + (min-1);
+				}
+				var int_string = new_int_array.join();
+				$('#chart1').hide();
+				$('#longest_section').hide();
+				$('#run_time').hide();
+				$('#id_number_list').val(int_string);
+				$('#random_div').hide();
+				$('#submit').show();
+				$('#reset').show();
+             		   	$('#generate').show();
+				$('#submit_instr').show();
+			}
+			function cancel_random(){
+				$('#random_div').hide();
+                                $('#submit').show();
+				$('#reset').show();
+                                $('#generate').show();
+			}
+			function hit_reset(ev){
+				ev.preventDefault();
+				window.location = 'http://54.84.243.150/';
+			} 
+		</script>
+	</head>
+	<body>
+		<div class="row" style="text-align:center;padding:50px 50px 25px 50px;">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<h2>Enter up to 1,000 numbers below</h2>
+				<h4>Please separate the numbers with <span class="blue">commas</span>.</h4>
+				<h5>Want to generate many numbers at once? Use the <span class="attn">Random Number Generator</span>!</h5>
+
+				<div id="chart1" style="height:300px; width:500px;margin:50px auto;"></div><!-- 500 -->
+				<h5 id="run_time">{% if run_time %}Run Time of Algorithm: {{ run_time }} seconds{% endif %}</h5>
+			</div> 
+		</div>
+		{% if out %}
+		<div class="row" id="longest_section" style="text-align:center;margin-bottom:20px;background-color:#f5f5f5;">
+			<div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2">
+				<h4>The Longest Sequence is {{ out_ct }} numbers long</h4>
+				<p style="word-wrap:break-word;width:100%;">{{ out }}</p>
+			</div>
+		</div>
+		{% endif %}
+		<div class="row" id="submit_instr" style="text-align:center;margin-bottom:20px;background-color:#f5f5f5;">
+			<div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2">
+				<h4>Please hit Submit to submit these numbers</h4>
+                                <p class="attn" id="warn_msg"></p>
+			</div>
+		</div>
+		<div class="row" style="text-align:center;">        
+			<div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
+				{% if error_msg %}
+					<p class="attn">{{ error_msg }}</p>
+				{% endif %}
+				<form action="/" method="post">{% csrf_token %}
+					{{ number_form }}
+					<br />
+					<div style="text-align:right;">
+						<div class="clear10"></div>
+        					<input type="submit" class="submit btn btn-md btn-info" id="submit" value="Submit">
+						<button type="reset" class="btn btn-default" id="reset" value="Reset" onclick="hit_reset(event);">Reset</button>
+					</div>
+				</form>
+			</div>
+			<div class="col-lg-3 col-lg-offset-3 col-md-3 col-md-offset-3 col-sm-3 col-sm-offset-3 col-xs-3 col-xs-offset-3" style="margin-top:-32px;text-align:left;">
+			<button id="generate" class="btn btn-primary btn-sm" onclick="show_random();">Generate Random Numbers</button>
+			<div id="random_div" class="well" style="display:none;margin-top:40px;">
+				<br />
+				<div class="row" style="padding-bottom:10px;">
+					<div style="width:40%;padding-left:5%;display:inline;">Min Value</div>
+					<div style="width:40%;padding-left:5%;display:inline;"><input id="min" type="text" value="1"></div>
+				</div>
+                                <div class="row" style="padding-bottom:10px;">
+                                        <div style="width:40%;padding-left:5%;display:inline;">Max Value</div>
+                                        <div style="width:40%;padding-left:5%;display:inline;"><input id="max" type="text" value="200"></div>
+                                </div>
+                                <div class="row" style="padding-bottom:20px;">
+                                        <div style="width:40%;padding-left:5%;display:inline;"># of Data Points</div>
+                                        <div style="width:40%;padding-left:5%;display:inline;"><input id="num" type="text" value="100"></div>
+                                </div>
+
+				<button type="button" class="btn btn-success" onclick="make_random();">Generate</button>
+                                <button type="button" class="btn btn-default" onclick="cancel_random();">Cancel</button>
+			</div>	
+			</div>
+		</div>
+	</body>
+	<script>
+	</script>
+</html>
+
