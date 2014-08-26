@@ -52,7 +52,7 @@
 
 <a href="https://github.com/Estherbunny/LongestSubsequence/blob/master/sequence/sequence/views.py">/sequence/sequence/views.py</a>
 
-<br /><p>It is an <i>O (n log n)</i> implementation of finding the longest increasing subsequence. It is easy to see that there exists an <i>O (n^2)</i> solution to the problem of finding the longest increasing subsequence in an input sequence <i>x<sub>0</sub>,x<sub>1</sub>,...x<sub>n-1</sub></i>. First, let's present that.</p>
+<p><br />It is an <i>O (n log n)</i> implementation of finding the longest increasing subsequence. It is easy to see that there exists an <i>O (n^2)</i> solution to the problem of finding the longest increasing subsequence in an input sequence <i>x<sub>0</sub>,x<sub>1</sub>,...x<sub>n-1</sub></i>. First, let's present that.</p>
 
 <p>Let <i>L(i)</i> represent the longest increasing subsequence at index <i>i</i> of our input sequence. Then <i>L(i)=0</i> if <i>i=0</i>, and <i>L(i) = 1 + max<sub>j=0,...,(i-1)</sub>L(j)</i> if <i>x<sub>j</sub> &lt; x<sub>i</sub></i> and <i>i>0</i>. One can then use dynamic programming to create an array of size <i>n</i> which stores <i>L(i)</i>, and then for each <i>i</i>, traversed in order, the values of all <i>L(j)</i> and <i>x<sub>j</sub></i> (where <i>j &lt; i</i>) can be used to determine the value of <i>L(i)</i>.  This traversal of up to <i>n</i> previous data points, for each of the <i>n</i> data points gives rise to an <i>O (n^2)</i> runtime.</p>
 
