@@ -12,15 +12,15 @@
 
 <code>curl -H "Content-Type: application/json" -X POST -d '{"num_array":"1,4,5,6,2,1,5,7,3","verbose":1}' http://54.84.243.150/api/longest/</code>
 
-<p>and the resulting JSON output is</p>
+<br /><p>and the resulting JSON output is</p>
 
 <code>{"indexes": "0,1,2,3,7", "time": "3.2901763916e-05", "out": "1,4,5,6,7"}</code>
 
-<p>If called without the <code>verbose</code> parameter (or with <code>"verbose":0</code> or <code>"verbose":false</code>), then the call and output is simply:</p>
+<br /><p>If called without the <code>verbose</code> parameter (or with <code>"verbose":0</code> or <code>"verbose":false</code>), then the call and output is simply:</p>
 
 <code>curl -H "Content-Type: application/json" -X POST -d '{"num_array":"1,4,5,6,2,1,5,7,3"}' http://54.84.243.150/api/longest/</code>
 
-<p>and the resulting JSON output is</p>
+<br /><p>and the resulting JSON output is</p>
 
 <code>{"out": "1,4,5,6,7"}</code>
 
@@ -31,19 +31,19 @@
 <p>A non-POST request</p>
 <code>{"error":"Only method 'POST' is allowed"}</code>
 
-<p>Improperly formatted JSON in request<p>
+<br /><p>Improperly formatted JSON in request<p>
 <code>{"error":"Request data not properly formatted"}</code>
 
-<p>If "num_array" was not defined in JSON</p>
+<br /><p>If "num_array" was not defined in JSON</p>
 <code>{"error":"'num_array' not specified"}</code>
 
-<p>More than 1,000 numbers are in "num_array"</p>
+<br /><p>More than 1,000 numbers are in "num_array"</p>
 <code>{"error":"Input numbers are limited to 1,000 values"}</code>
 
-<p>A non-integer value is found in "num_array"</p>
+<br /><p>A non-integer value is found in "num_array"</p>
 <code>{"error":"Input numbers do not contain valid values"}</code>
 
-<p>An integer value is out of range of a Python integer (-2^63 to 2^63-1)</p>
+<br /><p>An integer value outside of the range of a Python integer (-2^63 to 2^63-1)</p>
 <code>{"error":"Input numbers should only contain integer values (-9223372036854775808 to 9223372036854775807)"}</code>
 
 <h4>Algorithm</h4>
@@ -52,7 +52,7 @@
 
 <a href="https://github.com/Estherbunny/LongestSubsequence/blob/master/sequence/sequence/views.py">/sequence/sequence/views.py</a>
 
-<p>It is an <i>O (n log n)</i> implementation of finding the longest increasing subsequence. It is easy to see that there exists an <i>O (n^2)</i> solution to the problem of finding the longest increasing subsequence in an input sequence <i>x<sub>0</sub>,x<sub>1</sub>,...x<sub>n-1</sub></i>. First, let's present that.</p>
+<br /><p>It is an <i>O (n log n)</i> implementation of finding the longest increasing subsequence. It is easy to see that there exists an <i>O (n^2)</i> solution to the problem of finding the longest increasing subsequence in an input sequence <i>x<sub>0</sub>,x<sub>1</sub>,...x<sub>n-1</sub></i>. First, let's present that.</p>
 
 <p>Let <i>L(i)</i> represent the longest increasing subsequence at index <i>i</i> of our input sequence. Then <i>L(i)=0</i> if <i>i=0</i>, and <i>L(i) = 1 + max<sub>j=0,...,(i-1)</sub>L(j)</i> if <i>x<sub>j</sub> &lt; x<sub>i</sub></i> and <i>i>0</i>. One can then use dynamic programming to create an array of size <i>n</i> which stores <i>L(i)</i>, and then for each <i>i</i>, traversed in order, the values of all <i>L(j)</i> and <i>x<sub>j</sub></i> (where <i>j &lt; i</i>) can be used to determine the value of <i>L(i)</i>.  This traversal of up to <i>n</i> previous data points, for each of the <i>n</i> data points gives rise to an <i>O (n^2)</i> runtime.</p>
 
@@ -66,11 +66,11 @@
 
 <p>The web frontend is powered by a template file <a href="https://github.com/Estherbunny/LongestSubsequence/blob/master/templates/frontend/home.html">(home.html)</a>, a <a href="https://github.com/Estherbunny/LongestSubsequence/blob/master/sequence/frontend/views.py">views.py file</a>, and a <a href="https://github.com/Estherbunny/LongestSubsequence/blob/master/sequence/frontend/models.py">models.py file</a>.</p>
 
-<p>In the template file, <a href="https://github.com/Estherbunny/LongestSubsequence/blob/master/templates/frontend/home.html">home.html</a>, the open source Javascript library <a href="http://www.jqplot.com/index.php">jqPlot</a> was used to make  graphs of the input numbers and the resulting longest increasing subsequence. Random numbers can be generated using Javascript.</p>
+<p>In the template file, <a href="https://github.com/Estherbunny/LongestSubsequence/blob/master/templates/frontend/home.html">home.html</a>, the open source Javascript library <a href="http://www.jqplot.com/index.php">jqPlot</a> was used to make  graphs of the input numbers and the resulting longest increasing subsequence. To facilitate the entry of numbers by the user, random numbers can be generated using Javascript.</p>
 
 <p>In the <a href="https://github.com/Estherbunny/LongestSubsequence/blob/master/sequence/frontend/views.py">views.py file</a>, a call is made to the API using Python's <code>urllib2</code> library. The output and indexes are formated for the template.</p>
 
-<p>In the <a href="https://github.com/Estherbunny/LongestSubsequence/blob/master/sequence/frontend/models.py">models.py file</a>, the form NumberForm() is defined. This form accepts the user's input on the main page</p>
+<p>In the <a href="https://github.com/Estherbunny/LongestSubsequence/blob/master/sequence/frontend/models.py">models.py file</a>, the form NumberForm() is defined. This form accepts the user's input from the main page</p>
 
 <h2>Directory Structure</h2>
 
