@@ -1,10 +1,10 @@
-<h2>API and Frontend for Longest Increasing Subsequence</h2>
+<h1>API and Frontend for Longest Increasing Subsequence</h1>
 <p>The code in this directory creates the website found at
 <a href="http://54.84.243.150/">http://54.84.243.150/</a></p>
 
 <p>It consists of two parts, a REST API call, and a web interface.</p>
 
-<h3>REST API call</h3>
+<h2>REST API call</h2>
 
 <p>The REST API call takes as input a sequence of integers, and outputs the longest increasing subsequence within that sequence of integers. There is an optional <code>verbose</code> parameter which allows you to receive a list of indexes of the longest increasing subsequence numbers within the original sequence, along with runtime information.</p>
 
@@ -62,7 +62,7 @@
 
 <p>Because the list <i>x<sub>S(0)</sub>,x<sub>S(1)</sub>,...,x<sub>S(M)</sub></i> is sorted, locating an insertion point is possible in <i>O (log n)</i> using binary search. Since we do this for every <i>i</i>, where <i>i = 0,1,...,(n-1)</i>, the entire algorithm takes <i>O (n log n)</i> to run.</p>
 
-<h3>Web Frontend</h3>
+<h2>Web Frontend</h2>
 
 <p>The web frontend is powered by a <a href="https://github.com/Estherbunny/LongestSubsequence/blob/master/templates/frontend/home.html">template file</a>, <a href="https://github.com/Estherbunny/LongestSubsequence/blob/master/sequence/frontend/views.py">views.py file</a>, and <a href="https://github.com/Estherbunny/LongestSubsequence/blob/master/sequence/frontend/models.py">models.py</a> file.</p>
 
