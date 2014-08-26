@@ -24,7 +24,27 @@
 
 <code>{"out": "1,4,5,6,7"}</code>
 
-The error codes
+<h5>Error Codes</h5>
+
+<p>If the API encounters an error in the incoming POST request, then an error is output in JSON. The data format for "num_array" is flexible enough to handle arbitrary amounts of spaces, but certain mistakes will trigger an error, such as a non-integer value. Some example errors are:</p>
+
+<p>A non-POST request</p>
+<code>{"error":"Only method 'POST' is allowed"}</code>
+
+<p>Improperly formatted JSON in request<p>
+<code>{"error":"Request data not properly formatted"}</code>
+
+<p>If "num_array" was not defined in JSON</p>
+<code>{"error":"'num_array' not specified"}</code>
+
+<p>More than 1,000 numbers are in "num_array"</p>
+<code>{"error":"Input numbers are limited to 1,000 values"}</code>
+
+<p>A non-integer value is found in "num_array"</p>
+<code>{"error":"Input numbers do not contain valid values"}</code>
+
+<p>An integer value is out of range of a Python integer (-2^63 to 2^63-1)</p>
+<code>{"error":"Input numbers should only contain integer values (-9223372036854775808 to 9223372036854775807)"}</code>
 
 <h4>Algorithm</h4>
 
