@@ -64,13 +64,30 @@
 
 <h2>Web Frontend</h2>
 
-<p>The web frontend is powered by a <a href="https://github.com/Estherbunny/LongestSubsequence/blob/master/templates/frontend/home.html">template file</a>, <a href="https://github.com/Estherbunny/LongestSubsequence/blob/master/sequence/frontend/views.py">views.py file</a>, and <a href="https://github.com/Estherbunny/LongestSubsequence/blob/master/sequence/frontend/models.py">models.py</a> file.</p>
+<p>The web frontend is powered by a <a href="https://github.com/Estherbunny/LongestSubsequence/blob/master/templates/frontend/home.html">template file</a>, <a href="https://github.com/Estherbunny/LongestSubsequence/blob/master/sequence/frontend/views.py">views.py file</a>, and <a href="https://github.com/Estherbunny/LongestSubsequence/blob/master/sequence/frontend/models.py">models.py file</a>.</p>
 
-<p>Additionally, the open source Javascript library <a href="http://www.jqplot.com/index.php">jqPlot</a> was used to make  graphs of the input numbers and the resulting longest increasing subsequence.</p>
+<p>In the <a href="https://github.com/Estherbunny/LongestSubsequence/blob/master/templates/frontend/home.html">template file</a>, the open source Javascript library <a href="http://www.jqplot.com/index.php">jqPlot</a> was used to make  graphs of the input numbers and the resulting longest increasing subsequence. Random numbers can be generated using Javascript.</p>
 
+<p>In the <a href="https://github.com/Estherbunny/LongestSubsequence/blob/master/sequence/frontend/views.py">views.py file</a>, a call is made to the API using Python's <code>urllib2</code> library. The output and indexes are formated for the template.</p>
 
+<p>In the <a href="https://github.com/Estherbunny/LongestSubsequence/blob/master/sequence/frontend/models.py">models.py file</a>, the form NumberForm() is defined. This form accepts the user's input on the main page</p>
 
 <h2>Directory Structure</h2>
+
+<p>The directory structure for the website and the API are as follows:</p>
+
+<p>
+<code>/static/</code><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>css/</code> : contains all CSS files (bootstrap3 and JQuery)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>js/</code> : contains all JS files (JQuery and jqPlot)<br />
+<br />
+<code>/templates/</code><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>frontend/</code><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>home.html</code> : template file for the homepage<br />
+<br />
+<code>/sequence/</code><br />
+</p>
+
 
 
 
