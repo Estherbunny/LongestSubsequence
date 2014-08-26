@@ -36,7 +36,12 @@ The error codes
 
 <p>Let <i>L(i)</i> represent the longest increasing subsequence at index <i>i</i> of our input sequence. Then <i>L(i)=0</i> if <i>i=0</i>, and <i>L(i) = 1 + max<sub>j=0,...,(i-1)</sub>L(j)</i> if <i>x<sub>j</sub> &lt; x<sub>i</sub></i> and <i>i>0</i>. One can then use dynamic programming to create an array of size <i>n</i> which stores <i>L(i)</i>, and then for each <i>i</i>, traversed in order, the values of all <i>L(j)</i> and <i>x<sub>j</sub></i> (where <i>j &lt; i</i>) can be used to determine the value of <i>L(i)</i>.  This traversal of up to <i>n</i> previous data points, for each of the <i>n</i> data points gives rise to an <i>O (n^2)</i> runtime.</p>
 
-<p>As we traverse the <i>j = 0,1,...,(i-1)</i> elements in for every <i>i</i>, it should become apparent that we are only interested in some "best case" previous scenarios, and all <i>j</i> that are not these "best case" scenarios are irrelevant. This "best case" for each potential longest-sequence found in <i>x<sub>0</sub>,x<sub>1</sub>,...x<sub>i-1</sub></i> consist of the smallest values <i>x<sub>j</sub></i> (where <i>j &lt; i</i>) which form the final integer in a longest subsequence of length <i>m</i>, for all <i>0 &le; m &le; M</i>, where <i>M</i> is the length of the largest subsequence found thus far. </p>
+<p>As we traverse the <i>j = 0,1,...,(i-1)</i> elements in for every <i>i</i>, it should become apparent that we are only interested in some "best case" <i>x<sub>j</sub></i>, and all <i>j</i> that are not these "best case" scenarios are irrelevant. When we are calculating <i>L(i)</i>, we search to extend a subsequence of length <i>m</i>, where <i>0 &le; m &le; M</i>, and <i>M</i> is the length of the largest subsequence found thus far. For every <i>m</i>, there is some <i>x<sub>j</sub></i> which is the smallest integer value that is the final data point in that subsequence of size <i>m</i>. We always want to extend the maximum <i>m</i> possible to get the longest subsequence, while still making sure that <i>x<sub>i</sub> &gt; x<sub>j</sub></i> for the <i>x<sub>j</sub></i> corresponding to that <i>m</i>.</p>
+
+<!--
+<p>
+This "best case" for each potential longest-sequence found in <i>x<sub>0</sub>,x<sub>1</sub>,...x<sub>i-1</sub></i> consists of the smallest values <i>x<sub>j</sub></i> (where <i>j &lt; i</i>) which form the final integer in a longest subsequence of length <i>m</i>, for all <i>0 &le; m &le; M</i>, where <i>M</i> is the length of the largest subsequence found thus far. </p>
+-->
 
 <h3>Web Frontend</h3>
 
