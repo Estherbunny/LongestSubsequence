@@ -31,19 +31,19 @@
 <p>A non-POST request</p>
 <code>{"error":"Only method 'POST' is allowed"}</code>
 
-<br /><p>Improperly formatted JSON in request<p>
+<p><br />Improperly formatted JSON in request<p>
 <code>{"error":"Request data not properly formatted"}</code>
 
-<br /><p>If "num_array" was not defined in JSON</p>
+<p><br />If "num_array" was not defined in JSON</p>
 <code>{"error":"'num_array' not specified"}</code>
 
-<br /><p>More than 1,000 numbers are in "num_array"</p>
+<p><br />More than 1,000 numbers are in "num_array"</p>
 <code>{"error":"Input numbers are limited to 1,000 values"}</code>
 
-<br /><p>A non-integer value is found in "num_array"</p>
+<p><br />A non-integer value is found in "num_array"</p>
 <code>{"error":"Input numbers do not contain valid values"}</code>
 
-<br /><p>An integer value outside of the range of a Python integer (-2^63 to 2^63-1)</p>
+<p><br />An integer value outside of the range of a Python integer (-2^63 to 2^63-1)</p>
 <code>{"error":"Input numbers should only contain integer values (-9223372036854775808 to 9223372036854775807)"}</code>
 
 <h4>Algorithm</h4>
