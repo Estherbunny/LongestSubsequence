@@ -88,8 +88,8 @@
 <code>/sequence/</code><br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>sequence/</code><br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code><a href="https://github.com/Estherbunny/LongestSubsequence/blob/master/sequence/sequence/views.py">views.py</a></code> : The API call is processed here<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>settings.py</code> : Django file<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>urls.py</code> : Django file<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code><a href="https://github.com/Estherbunny/LongestSubsequence/blob/master/sequence/sequence/settings.py">settings.py</a></code> : Django file. BASE_URL is set here to http://54.84.243.150/<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code><a href="https://github.com/Estherbunny/LongestSubsequence/blob/master/sequence/sequence/urls.py">urls.py</a></code> : Django file<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>frontend/</code><br /> 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code><a href="https://github.com/Estherbunny/LongestSubsequence/blob/master/sequence/frontend/views.py">views.py</a></code> : Processes the main website<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code><a href="https://github.com/Estherbunny/LongestSubsequence/blob/master/sequence/frontend/models.py">models.py</a></code> : NumberForm() to get user input for main website <br />
