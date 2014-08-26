@@ -64,9 +64,9 @@
 
 <h2>Web Frontend</h2>
 
-<p>The web frontend is powered by a <a href="https://github.com/Estherbunny/LongestSubsequence/blob/master/templates/frontend/home.html">template file</a>, <a href="https://github.com/Estherbunny/LongestSubsequence/blob/master/sequence/frontend/views.py">views.py file</a>, and <a href="https://github.com/Estherbunny/LongestSubsequence/blob/master/sequence/frontend/models.py">models.py file</a>.</p>
+<p>The web frontend is powered by a template file <a href="https://github.com/Estherbunny/LongestSubsequence/blob/master/templates/frontend/home.html">(home.html)</a>, a <a href="https://github.com/Estherbunny/LongestSubsequence/blob/master/sequence/frontend/views.py">views.py file</a>, and a <a href="https://github.com/Estherbunny/LongestSubsequence/blob/master/sequence/frontend/models.py">models.py file</a>.</p>
 
-<p>In the <a href="https://github.com/Estherbunny/LongestSubsequence/blob/master/templates/frontend/home.html">template file</a>, the open source Javascript library <a href="http://www.jqplot.com/index.php">jqPlot</a> was used to make  graphs of the input numbers and the resulting longest increasing subsequence. Random numbers can be generated using Javascript.</p>
+<p>In the template file, <a href="https://github.com/Estherbunny/LongestSubsequence/blob/master/templates/frontend/home.html">home.html</a>, the open source Javascript library <a href="http://www.jqplot.com/index.php">jqPlot</a> was used to make  graphs of the input numbers and the resulting longest increasing subsequence. Random numbers can be generated using Javascript.</p>
 
 <p>In the <a href="https://github.com/Estherbunny/LongestSubsequence/blob/master/sequence/frontend/views.py">views.py file</a>, a call is made to the API using Python's <code>urllib2</code> library. The output and indexes are formated for the template.</p>
 
@@ -83,9 +83,19 @@
 <br />
 <code>/templates/</code><br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>frontend/</code><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>home.html</code> : template file for the homepage<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code><a href="https://github.com/Estherbunny/LongestSubsequence/blob/master/templates/frontend/home.html">home.html</a></code> : template file for the homepage<br />
 <br />
 <code>/sequence/</code><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>sequence/</code><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code><a href="https://github.com/Estherbunny/LongestSubsequence/blob/master/sequence/sequence/views.py">views.py</a></code> : The API call is processed here<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>settings.py</code> : Django file<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>urls.py</code> : Django file<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>frontend/</code><br /> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code><a href="https://github.com/Estherbunny/LongestSubsequence/blob/master/sequence/frontend/views.py">views.py</a></code> : Processes the main website<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code><a href="https://github.com/Estherbunny/LongestSubsequence/blob/master/sequence/frontend/models.py">models.py</a></code> : NumberForm() to get user input for main website <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>manage.py</code> : Django manage.py file<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>wsgi.py</code> : Django wsgi.py file<br />
+
 </p>
 
 
