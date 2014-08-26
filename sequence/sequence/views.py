@@ -89,7 +89,7 @@ def longest(request):
 """    corresponding value in our list, so that we return a list of       """
 """    increasing numbers (out_vals). If print_indexes is true, print the """
 """    indexes as well                                                    """
-def print_answers(list1,linked_answer,linked_answer_start,print_indexes=False):
+def print_answers(x,linked_answer,linked_answer_start,print_indexes=False):
     next_link = linked_answer_start
     out_vals = []
     if print_indexes:
@@ -98,7 +98,7 @@ def print_answers(list1,linked_answer,linked_answer_start,print_indexes=False):
         out_indexes = []
 
     while next_link != -1:
-        out_vals.append(list1[next_link])
+        out_vals.append(x[next_link])
         next_link = linked_answer[next_link]
         if print_indexes and next_link != -1:
             out_indexes.append(next_link)
@@ -110,11 +110,11 @@ def print_answers(list1,linked_answer,linked_answer_start,print_indexes=False):
 
 """ This is the long way to find subsequence of increasing integers O(n^2)  """
 """    (we did not end up using this, but it was our first answer)          """
-""" Loop through the input "list1", and determine if the longest increasing """
+""" Loop through the input "x", and determine if the longest increasing     """
 """    subsequence can be updated based on previously values in the list    """
-def longest_increasing(list1):
+def longest_increasing(x):
 
-    N = len(list1)
+    N = len(x)
     # all numbers in list will have a longest subsequence of at least 1 (themselves)   
     longest = [1]*N
 
@@ -124,25 +124,25 @@ def longest_increasing(list1):
     linked_answer= [-1]*N
     linked_answer_start = 0
 
-    # L is the current longest subsequence length
-    L = 1
+    # M is the current longest subsequence length
+    M = 1
 
-    # iterate through the input(list1), and for every data point i,
-    #    for the previous values in list1, see if we have found a data point that
+    # iterate through the input(x), and for every data point i,
+    #    for the previous values in x, see if we have found a data point that
     #    is both increasing from some value j previously seen, and for which
     #    a longer subsequence is possible when we form a subsequence with that j
     for i in range(1,N):
         j = i
         while j >= 0:
-            if ((longest[j] + 1) > longest[i]) and (list1[j] < list1[i]):
+            if ((longest[j] + 1) > longest[i]) and (x[j] < x[i]):
                 longest[i] = longest[j] + 1
                 linked_answer[i] = j
             j -= 1
 
         # keep track of the longest subsequence thus far
         #    and the index  to start tracing back to discover the subsequence
-        if longest[i] > L:
-            L = longest[i]
+        if longest[i] > M:
+            M = longest[i]
             linked_answer_start = i
 
     return (linked_answer,linked_answer_start)
@@ -151,25 +151,25 @@ def longest_increasing(list1):
 
 
 """       The Algorithm for Longest Increasing Subsequence                    """
-""" Loop through the input "list1", and determine if the longest increasing   """
+""" Loop through the input "x", and determine if the longest increasing       """
 """    subsequence can be updated based on previously values in the list      """
 """ Rather than explicitly checking every previous value as in the O(n^2)     """
 """    solution, use a list S which tracks the best solution thus far.        """
 """ S is a list which tracks the best subsequence as we iterate               """
-"""    i = 1 to N (length of input "list1"). Specifically, an entry in S is   """ 
-""" S[length of subseq.] = index of final integer in optimal subseq. in list1 """
-""" It follows that list1[S[i-1]] < list1[S[i]], since if there did exist a   """
-"""    a list[S[i]] that was less than list1[S[i-1]], then one would have had """
-"""    to have updated list1[S[i-1]] with the index of whatever integer came  """
+"""    i = 1 to N (length of input "x"). Specifically, an entry in S is       """ 
+""" S[length of subseq.] = index of final integer in optimal subseq. in x     """
+""" It follows that x[S[i-1]] < x[S[i]], since if there did exist a           """
+"""    a list[S[i]] that was less than x[S[i-1]], then one would have had     """
+"""    to have updated x[S[i-1]] with the index of whatever integer came      """
 """    before in the subsequence leading up to list[S[i]]                     """ 
 """ We use the array "linked_answer", of size N, to point to the previous     """
-"""    integer in list1 that forms the best subsequence at any point i        """
+"""    integer in x that forms the best subsequence at any point i            """
 """ The value of linked_answer for point i can be updated at the moment       """
 """    S is updated for the new value of list[i].                             """
 
-def smartest_longest_increasing(list1):
+def smartest_longest_increasing(x):
 
-    N = len(list1)
+    N = len(x)
 
     # linked_answer will be a pointer to previous integer in this subsequence
     # linked_answer_start is where one would begin following linked_answer to 
@@ -177,46 +177,46 @@ def smartest_longest_increasing(list1):
     linked_answer= [-1]*N
     linked_answer_start = 0
 
-    # L is the current longest subsequence length
-    L = 1
+    # M is the current longest subsequence length
+    M = 1
 
     # S is an array of index values for the optimal subsequences
-    # S[length of subseq.] = index of final integer in optimal subseq. in list1
+    # S[length of subseq.] = index of final integer in optimal subseq. in x
     S = [-1]*N
     S[0] = 0
 
     for i in range(1,N):
 
-        if list1[i] == list1[i-1]:
+        if x[i] == x[i-1]:
             # a repeated value won't alter the final solution 
             pass
         else:
 
             # find the place where list[i] would be "inserted" into the "list" formed
-            #    by [list1[elem] for elem in S[:L]]. The insertion point
+            #    by [x[elem] for elem in S[:M]]. The insertion point
             #    for repeated values will be to the left of other values.
             #    If the insertion point is at the end of S, then a new
             #    "longest length" has been found
 
             # Originally done with bisect, but this
-            # wastefully performs list1[elem] for every elem in S
+            # wastefully performs x[elem] for every elem in S
             #     import bisect
-            #     S_place = bisect.bisect_left([list1[elem] for elem in S[:L]],list1[i])
+            #     S_place = bisect.bisect_left([x[elem] for elem in S[:M]],x[i])
 
             # Efficient Binary Insertion, where a repeated value is inserted to 
             #     the left of the other identical values. Note that we are not going to
             #     actually insert a value (unless we find a new longest-length). 
             lo = 0
-            hi = L
+            hi = M
             while lo < hi:
                 mid = (lo+hi)/2
-                if list1[S[mid]] < list1[i]: 
+                if x[S[mid]] < x[i]: 
                     lo = mid+1
                 else: 
                     hi = mid
             S_place = lo
 
-            # S_place is index of list1[i] within the "list" [list1[elem] for elem in S[:L]]
+            # S_place is index of x[i] within the "list" [x[elem] for elem in S[:M]]
             # linked_answer is an index to the previous index in a subsequence
             # Since the value stored in S is an index into list[i], to find
             #    the previous (optimal) index in a subsequence, get the value for
@@ -224,16 +224,16 @@ def smartest_longest_increasing(list1):
             linked_answer[i] = S[S_place-1]  
 
             # If S_place represents a new longest-length (by having an insertion point
-            #    at the end of S[:L]), then add it to S and increase the longest length, L
-            if S_place > (L-1):
+            #    at the end of S[:M]), then add it to S and increase the longest length, M
+            if S_place > (M-1):
                 S[S_place] = i
-                L += 1
+                M += 1
                 linked_answer_start = i
 
             # otherwise if the input value corresponding to the index S[S_place] is 
-            #    greater than the new value (list1[i]) that mapped to S_place, update
+            #    greater than the new value (x[i]) that mapped to S_place, update
             #    S[S_place] because it should always be optimal
-            elif list1[S[S_place]] > list1[i]:
+            elif x[S[S_place]] > x[i]:
                 S[S_place] = i
 
     return (linked_answer,linked_answer_start)

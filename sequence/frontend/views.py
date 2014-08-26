@@ -9,6 +9,13 @@ import urllib2
 import simplejson
 import string
 
+""" The function "home" creates the main website              """
+""" It accepts the POST requests from when a user enters a    """
+"""     sequence of numbers (using the NumberForm) and makes  """
+"""     the API call to settings.BASE_URL+'/api/longest/'     """
+""" It also renders a blank NumberForm when the user enters   """
+"""     a GET request to the website                          """
+
 def home(request):
     number_form = NumberForm()
     out = ''
@@ -23,9 +30,10 @@ def home(request):
         if number_form.is_valid():
             input_nums = number_form.cleaned_data['number_list']
             input_nums = ''.join(input_nums.splitlines())
+            # input_nums_array will be needed for the JSON plot
             input_nums_array = input_nums.split(',')
 
-            # construct an API call to API server
+            # construct an API call to API server, and send input_nums
             params = '{"num_array":"'+input_nums+'","verbose":1}'   
             opener = urllib2.build_opener(urllib2.HTTPHandler)
             headers = {"ContentType":"application/json; charset=utf-8"}
@@ -34,11 +42,12 @@ def home(request):
             my_response = opener.open(my_request)
             response_data = simplejson.load(my_response)
 
+            # detect any errors
             error = response_data.get('error','')
             if error:
                 error_msg = error
             else:
-                # format out and indexes for the template
+                # format the output and indexes for the template
                 out = response_data.get('out','')
                 out_ct = out.count(',') + 1
                 out = string.replace(out,',',', ')
